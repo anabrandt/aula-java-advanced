@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{employee.list.title}">Employee List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: #fff;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="#{employee.list.title}">Employee List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="#{employee.name}">Name</th>
+                <th th:text="#{employee.email}">Email</th>
+                <th th:text="#{employee.actions}">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.name}">Name</td>
+                <td th:text="${employee.email}">Email</td>
+                <td>
+                    <a th:href="@{/employees/edit/{id}(id=${employee.id})}" class="button" th:text="#{employee.edit}">Edit</a>
+                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}" class="button" th:text="#{employee.delete}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/employees/new}" class="button" th:text="#{employee.add.new}">Add New Employee</a>
+</body>
+</html>
